@@ -44,11 +44,11 @@ def insert_file(service, title, description, parent_id, mime_type, filename):
     # 'mimeType': mime_type
     # }
 
-    body = {'title': title, 'description': description, 'name': filename, 'mimeType': 'application/vnd.google-apps.spreadsheet'}
+    body = {'parents': [parent_id], 'title': title, 'description': description, 'name': filename, 'mimeType': 'application/vnd.google-apps.spreadsheet'}
 
     # Set the parent folder.
-    if parent_id:
-        body['parents'] = [{'id': parent_id}]
+    # if parent_id:
+    #     body['parents'] = [{'id': parent_id}]
 
     try:
         # req = service.files().insert(
