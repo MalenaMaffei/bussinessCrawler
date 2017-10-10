@@ -37,7 +37,12 @@ import sys
 # for row in reader
 # print row
 
-
+def isImage(link):
+    png = "png" in link
+    jpeg = "jpeg" in link
+    jpg = "jpg" in link
+    gif = "gif" in link
+    return(png or jpeg or jpg or gif)
 
 def scrapeWebsite(writer, url, name):
     new_urls = deque([url])
@@ -60,6 +65,7 @@ def scrapeWebsite(writer, url, name):
         # move next url from the queue to the set of processed urls
 
         if foundEverything(emails, fbs, tws):
+            print("found everything! Moving on...")
             break
 
         new_url = new_urls.popleft()
@@ -90,16 +96,8 @@ def scrapeWebsite(writer, url, name):
             link = anchor.attrs["href"] if "href" in anchor.attrs else ''
             # print("LINK: %s" % link)
             # resolve relative links
-            if link.startswith('/'):
-                # print("link found: %s" % link)
-                link = base_url + link
-                # print("link startswith / now is: %s" % link)
 
-            elif link.startswith('#'):
-                # print("ignored: %s" % link)
-                continue
-
-            elif "facebook" in link:
+            if "facebook" in link:
                 print("FB found")
                 fbs.update([link])
                 continue
@@ -109,25 +107,29 @@ def scrapeWebsite(writer, url, name):
                 tws.update([link])
                 continue
 
-            # elif "instagram" in link:
-            #     print("INSTA found")
-            #     instas.update([link])
-            #     continue
-            #
-            # elif "pinterest" in link:
-            #     print("PINT found")
-            #     pins.update([link])
-            #     continue
-
             elif "pdf" in link:
                 # print("PDF found")
                 print("ignored: %s" % link)
                 continue
 
-            elif "png" in link or "jpg" in link:
-                # print("PDF found")
+            # elif "png" in link or "jpg" in link:
+            #     # print("PDF found")
+            #     print("ignored: %s" % link)
+            #     continue
+            elif isImage(link):
                 print("ignored: %s" % link)
                 continue
+
+            elif link.startswith('/'):
+                # print("link found: %s" % link)
+                link = base_url + link
+                # print("link startswith / now is: %s" % link)
+
+            elif link.startswith('#'):
+                # print("ignored: %s" % link)
+                continue
+
+
 
             elif not link.startswith('http'):
                 # print("link found: %s" % link)
@@ -163,7 +165,7 @@ def foundEverything(emails, fbs, tws):
 
 def main():
     csvFileOut = open('prueba.csv', 'w')
-    csvFileIn = open('restaurants in  miami.csv', 'r')
+    csvFileIn = open('../restaurants in  miami.csv', 'r')
     reader = csv.DictReader(csvFileIn)
     fieldnames = ['name', 'URL', 'emails', 'facebook', 'twitter']
     writer = csv.DictWriter(csvFileOut, fieldnames=fieldnames)
