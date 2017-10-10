@@ -36,33 +36,12 @@ def insert_file(service, title, description, parent_id, mime_type, filename):
     Returns:
     Inserted file metadata if successful, None otherwise.
     """
-    # media_body = MediaFileUpload(filename, mimetype=mime_type, resumable=True)
     media_body = MediaFileUpload(filename, mimetype=mime_type)
-    # body = {
-    # 'title': title,
-    # 'description': description,
-    # 'mimeType': mime_type
-    # }
 
     body = {'parents': [parent_id], 'title': title, 'description': description, 'name': filename, 'mimeType': 'application/vnd.google-apps.spreadsheet'}
 
-    # Set the parent folder.
-    # if parent_id:
-    #     body['parents'] = [{'id': parent_id}]
 
     try:
-        # req = service.files().insert(
-        #     body=body,
-        #     media_body=media_body)
-        # req = service.files().create(media_body=media_body, body=body)
-        # req.uri = req.uri + '&convert=true'
-        #
-        # file = req.execute()
-        #
-        # # Uncomment the following line to print the File ID
-        # # print 'File ID: %s' % file['id']
-        #
-        # return file
 
         fiahl = service.files().create(body=body, media_body=media_body).execute()
         return fiahl
@@ -120,15 +99,6 @@ def main():
 
     res = insert_file(service, 'prueba CSV', 'una desc del archivo', '0B6hqnDHYpCqKMHp0aG9ZVFZRR3M', 'text/csv', 'prueba.csv')
     print(res)
-    # results = service.files().list(
-    #     pageSize=10,fields="nextPageToken, files(id, name)").execute()
-    # items = results.get('files', [])
-    # if not items:
-    #     print('No files found.')
-    # else:
-    #     print('Files:')
-    #     for item in items:
-    #         print('{0} ({1})'.format(item['name'], item['id']))
 
 
 
