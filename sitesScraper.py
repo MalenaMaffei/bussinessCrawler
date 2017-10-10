@@ -2,11 +2,13 @@ from googleplaces import GooglePlaces, types, lang
 import sys
 import time
 import csv
+import datetime
+import subirAlDrive
 
 YOUR_API_KEY = 'AIzaSyAM22VZLdFEx4ssRf2Anuik8GpE8cQzVg8'
 
 
-
+# TODO: eliminar webs duplicados
 
 def getInfo(query_result, writer):
     for place in query_result.places:
@@ -34,7 +36,7 @@ def main(searchTerm):
     google_places = GooglePlaces(YOUR_API_KEY)
     search = searchTerm
     query_result = google_places.text_search(search)
-    fName = search + ".csv"
+    fName = search + '-{:%Y-%b-%d %H:%M:%S}'.format(datetime.datetime.now()) +".csv"
 
 
     csvFile = open(fName, 'w')
@@ -52,6 +54,8 @@ def main(searchTerm):
         getInfo(query_result, writer)
 
     csvFile.close()
+    print("subiendo al drive...")
+    subirAlDrive.main(fName, search, 'Search results of ' + search, 'web')
     print("All done!")
     # if query_result.has_next_page_token:
     # #     query_result_next_page = google_places.nearby_search(

@@ -23,6 +23,8 @@ SCOPES = 'https://www.googleapis.com/auth/drive'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Drive API Python Quickstart'
 
+WEBSITES = '0B6hqnDHYpCqKeWVmVC1CdnJBd2c'
+EMAILS = '0B6hqnDHYpCqKVHJTQm9oemtmLVU'
 def insert_file(service, title, description, parent_id, mime_type, filename):
     """Insert new file.
 
@@ -85,7 +87,7 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
-def main():
+def main(filename, title, desc, folder):
     """Shows basic usage of the Google Drive API.
 
     Creates a Google Drive API service object and outputs the names and IDs
@@ -95,9 +97,16 @@ def main():
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('drive', 'v3', http=http)
 
+# TODO hacer bien esto
+    if folder == 'web':
+        folder_var = WEBSITES
+    elif folder == 'email':
+        folder_var = EMAILS
+
+
     # def insert_file(service, title, description, parent_id, mime_type, filename):
 
-    res = insert_file(service, 'prueba CSV', 'una desc del archivo', '0B6hqnDHYpCqKMHp0aG9ZVFZRR3M', 'text/csv', 'prueba.csv')
+    res = insert_file(service, title, desc, folder_var, 'text/csv', filename)
     print(res)
 
 
