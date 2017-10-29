@@ -1,0 +1,106 @@
+2017-10-29 19:02:28,632 - __main__ - INFO - Handling baseurl: https://www.miamiculinarytours.com, path: https://www.miamiculinarytours.com
+2017-10-29 19:02:28,632 - __main__ - INFO - Processing https://www.miamiculinarytours.com
+2017-10-29 19:02:30,176 - __main__ - INFO - !!!!!!!!!!!!!!!!!!MAIL found: {'info@miamiculinarytours.com'}
+2017-10-29 19:02:30,206 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com
+2017-10-29 19:02:30,206 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,206 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/food-tours/
+2017-10-29 19:02:30,206 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,206 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,206 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/private-food-tours-in-miami/
+2017-10-29 19:02:30,206 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,206 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,206 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/faqs/
+2017-10-29 19:02:30,206 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,206 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,206 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/about-miami-culinary-tours/
+2017-10-29 19:02:30,206 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,206 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/gift-cards/
+2017-10-29 19:02:30,207 - __main__ - DEBUG - ignored as media or blog
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/blog/
+2017-10-29 19:02:30,207 - __main__ - DEBUG - ignored as media or blog
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/contact-us/
+2017-10-29 19:02:30,207 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com
+2017-10-29 19:02:30,207 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New link found: tel:( 786) 942-8856
+2017-10-29 19:02:30,207 - __main__ - DEBUG - As link did not start with http was changed to: https://www.miamiculinarytours.comtel:( 786) 942-8856
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New link found: https://fareharbor.com/embeds/book/miamiculinarytours/items/calendar/
+2017-10-29 19:02:30,207 - __main__ - DEBUG - None of the conditions were met, link was from outside
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New link found: 
+2017-10-29 19:02:30,207 - __main__ - DEBUG - As link did not start with http was changed to: https://www.miamiculinarytours.com
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New link found: /tour/south-beach-tour/
+2017-10-29 19:02:30,207 - __main__ - DEBUG - link startswith / now is: https://www.miamiculinarytours.com/tour/south-beach-tour/
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,207 - __main__ - DEBUG - New link found: /tour/little-havana-food-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - link startswith / now is: https://www.miamiculinarytours.com/tour/little-havana-food-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New link found: /tour/wynwood-food-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - link startswith / now is: https://www.miamiculinarytours.com/tour/wynwood-food-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New link found: /tour/design-district-midtown-food-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - link startswith / now is: https://www.miamiculinarytours.com/tour/design-district-midtown-food-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/south-beach-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/south-beach-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/south-beach-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/little-havana-food-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/little-havana-food-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/little-havana-food-tour/
+2017-10-29 19:02:30,208 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,208 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/wynwood-food-tour/
+2017-10-29 19:02:30,209 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,209 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/wynwood-food-tour/
+2017-10-29 19:02:30,209 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,209 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/wynwood-food-tour/
+2017-10-29 19:02:30,209 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,209 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/design-district-midtown-food-tour/
+2017-10-29 19:02:30,209 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,209 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/design-district-midtown-food-tour/
+2017-10-29 19:02:30,209 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,209 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/design-district-midtown-food-tour/
+2017-10-29 19:02:30,209 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,209 - __main__ - DEBUG - New link found: #
+2017-10-29 19:02:30,209 - __main__ - DEBUG - link startswith # was ignored
+2017-10-29 19:02:30,209 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/private-food-tours-in-miami/
+2017-10-29 19:02:30,209 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,209 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/south-beach-tour/
+2017-10-29 19:02:30,209 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,209 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/little-havana-food-tour/
+2017-10-29 19:02:30,209 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/wynwood-food-tour/
+2017-10-29 19:02:30,210 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/tour/miami-city-food-tour/
+2017-10-29 19:02:30,210 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/privacy-policy/
+2017-10-29 19:02:30,210 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/terms-and-conditions/
+2017-10-29 19:02:30,210 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/partners/
+2017-10-29 19:02:30,210 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/affiliates/
+2017-10-29 19:02:30,210 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/careers/
+2017-10-29 19:02:30,210 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,210 - __main__ - DEBUG - New link found: https://www.miamiculinarytours.com/sitemap/
+2017-10-29 19:02:30,211 - __main__ - DEBUG - Link did start with http
+2017-10-29 19:02:30,211 - __main__ - DEBUG - New Link added as was not in processed or new
+2017-10-29 19:02:30,211 - __main__ - DEBUG - New link found: https://www.facebook.com/MiamiCulinaryTours
+2017-10-29 19:02:30,211 - __main__ - INFO - FB found: https://www.facebook.com/MiamiCulinaryTours
+2017-10-29 19:02:30,211 - __main__ - DEBUG - New link found: https://twitter.com/miaculinarytour
+2017-10-29 19:02:30,211 - __main__ - INFO - TW found: https://twitter.com/miaculinarytour
+2017-10-29 19:02:30,211 - __main__ - INFO - found everything! Moving on...
+2017-10-29 19:02:30,211 - __main__ - INFO - found everything! Moving on...
