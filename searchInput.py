@@ -70,8 +70,8 @@ if __name__ == '__main__':
 
     app = QApplication(sys.argv)
 
-    sys.stdout = OutLog( edit, sys.stdout)
-    sys.stderr = OutLog( edit, sys.stderr, QtGui.QColor(255,0,0) )
+    #sys.stdout = OutLog( edit, sys.stdout)
+    #sys.stderr = OutLog( edit, sys.stderr, QtGui.QColor(255,0,0) )
 
 
     ex = App()

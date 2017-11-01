@@ -1,4 +1,5 @@
-#! /usr/bin/python3
+#! /usr/bin/python36
+from selenium import webdriver
 from bs4 import BeautifulSoup
 import requests
 import requests.exceptions
@@ -8,11 +9,11 @@ import re
 import csv
 import sys
 import logging
-# import subirAlDrive
+import subirAlDrive
 
-MAX_URLS = 20 #absolute maximum of urls to scrape
-MID_URLS = 15 # if theres 1 contact found, stop after this amount of links
-
+MAX_URLS = 15 #absolute maximum of urls to scrape
+MID_URLS = 10 # if theres 1 contact found, stop after this amount of links
+#
 # Setting Logger Up
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -20,15 +21,46 @@ logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler('test.log')
 handler.setLevel(logging.DEBUG)
 #logging format
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+formatter = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s")
 handler.setFormatter(formatter)
 # add the handlers to the logger
 logger.addHandler(handler)
 
+#stream handler
+consoleHandler = logging.StreamHandler(sys.stdout)
+consoleHandler.setFormatter(formatter)
+consoleHandler.setLevel(logging.INFO)
+logger.addHandler(consoleHandler)
+
+browser = webdriver.Firefox()
+
+def theBigGuns(url, emails):
+    browser.get(url)
+    source = browser.page_source
+    findEmail(source, emails)
 
 
 
+def reCheck(urls, emails):
+    for url in urls:
+        theBigGuns(url, emails)
+        if len(emails) > 0:
+            return
 
+
+def findEmail(text, emails):
+    emailRegex = re.compile(r'''
+        [a-zA-Z0-9._%+-]+ #userName
+        @
+        [a-zA-Z0-9._%+-]+ #domainName
+        \.[a-zA-z]{2,4} #dot-something
+        ''', re.VERBOSE|re.I)
+
+    new_emails = set(re.findall(emailRegex, text))
+
+    if len(new_emails) != 0:
+        logger.info("BG!!!!!!!!!!!!!!!!!!MAIL found: %s", new_emails)
+        emails.update(new_emails)
 
 
 def isImage(link):
@@ -68,12 +100,13 @@ def scrapeWebsite(writer, url, name):
 
         if len(processed_urls) > MID_URLS:
             if(amountFound(emails, fbs, tws) > 1):
-                # print("Theres nothing left prbly. Moving on...")
-                logger.warn("Searched %d links. Theres nothing left prbly. Moving on...", MID_URLS)
+                logger.warning("Searched %d links. Theres nothing left prbly. Moving on...", MID_URLS)
+                reCheck(processed_urls, emails)
                 break;
 
             if len(processed_urls) > MAX_URLS:
-                logger.warn("Searched %d links and nothing was found! Moving on...", MAX_URLS)
+                logger.warning("Searched %d links and nothing was found! Moving on...", MAX_URLS)
+                reCheck(processed_urls, emails)
                 break;
 
 
@@ -83,17 +116,18 @@ def scrapeWebsite(writer, url, name):
 
 
         # get url's content
-        print("Processing %s" % new_url)
         logger.info("Processing %s", new_url)
 
-        response = requests.get(new_url)
+
         try:
+            response = requests.get(new_url)
             response.raise_for_status()
         except Exception as axc:
             logger.error('There was a problem processing %s', new_url)
             logger.error('Failed to open website', exc_info=True)
             continue
 
+        # print(response.text)
         # extract all email addresses and add them into the resulting set
 
 
@@ -107,29 +141,43 @@ def scrapeWebsite(writer, url, name):
             ''', re.VERBOSE|re.I)
 
         new_emails = set(re.findall(emailRegex, response.text))
-        emails.update(new_emails)
+
+        if len(new_emails) != 0:
+            logger.info("!!!!!!!!!!!!!!!!!!MAIL found: %s", new_emails)
+            emails.update(new_emails)
 
         # print("MAIL found: %s" % new_emails)
-        logger.info("!!!!!!!!!!!!!!!!!!MAIL found: %s", new_emails)
+
 
         # create a beutiful soup for the html document
         soup = BeautifulSoup(response.text, "html.parser")
+        # print(response.text)
 
         # # find and process all the anchors in the document
-        for anchor in soup.find_all("a"):
+        aTags = soup.find_all("a")
+        #TODO ver aca si me conviene popular con los otros links
+        if len(aTags) == 0:
+            # browser.get()
+            # aTags = browser.find_elements_by_tag_name('a')
+            reCheck(processed_urls, emails)
+            break
+
+
+        for anchor in aTags:
             if foundEverything(emails, fbs, tws):
                 logger.info("found everything! Moving on...")
                 break
             # extract link url from the anchor
             link = anchor.attrs["href"] if "href" in anchor.attrs else ''
             logger.debug("New link found: %s", link)
-            # resolve relative links
+
+
 
             if "facebook" in link:
                 logger.info("FB found: %s", link)
                 fbs.update([link])
                 continue
-
+            #
             elif "twitter" in link:
                 logger.info("TW found: %s", link)
                 tws.update([link])
@@ -139,12 +187,12 @@ def scrapeWebsite(writer, url, name):
                 logger.debug("ignored as pdf")
                 continue
 
-            # elif "mailto" in link:
 
-            elif isImage(link):
+
+            elif isImage(link) or "javascript" in link:
                 logger.debug("ignored as media or blog")
                 continue
-
+            #
             elif link.startswith('/'):
                 link = base_url + link
                 logger.debug("link startswith / now is: %s", link)
@@ -197,32 +245,43 @@ def amountFound(emails, fbs, tws):
 
 def main():
 
-
-
-
-    # fileIn = 'clinic in Miami-2017-Oct-20 12:54:47.csv'
-    # # csvFileIn = open('../restaurants in  miami.csv', 'r')
-    # csvFileIn = open(fileIn, 'r')
-    url = 'https://www.miamiculinarytours.com'
-    name = 'MCT'
+    #MODO UNA SOLA PAGINA
+    url = 'https://www.labsalonmiami.com/'
+    name = 'labsalonmiami'
     fileOut = 'emails for ' + name + '.csv'
     csvFileOut = open(fileOut, 'w')
-    #
-    # reader = csv.DictReader(csvFileIn)
     fieldnames = ['name', 'URL', 'emails', 'facebook', 'twitter']
     writer = csv.DictWriter(csvFileOut, fieldnames=fieldnames)
     writer.writeheader()
+    logger.info("Scraping: %s", url)
+    scrapeWebsite(writer, url, name)
+    csvFileOut.close()
+    logger.info("ALL DONE")
+    csvFileOut.close()
+
+
+
+    # fileIn = 'hairdresser in Miami-2017-Oct-09.csv'
+    # csvFileIn = open(fileIn, 'r')
+    # fileOut = 'emails for ' + fileIn
+    # csvFileOut = open(fileOut, 'w')
+    # #
+    # reader = csv.DictReader(csvFileIn)
+    # fieldnames = ['name', 'URL', 'emails', 'facebook', 'twitter']
+    # writer = csv.DictWriter(csvFileOut, fieldnames=fieldnames)
+    # writer.writeheader()
     #
     # for row in reader:
+    #     logger.info("Scraping: %s", row['URL'])
     #     scrapeWebsite(writer, row['URL'], row['name'])
     #
     # csvFileOut.close()
     # csvFileIn.close()
     # subirAlDrive.main(fileOut, fileOut, fileOut, 'email')
-    # print("ALL DONE")
-
-    scrapeWebsite(writer, url, name)
-    csvFileOut.close()
+    # logger.info("ALL DONE")
+    #
+    #
+    # csvFileOut.close()
 
 
 if __name__ == "__main__":
