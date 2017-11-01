@@ -9,7 +9,10 @@ import re
 import csv
 import sys
 import logging
-import subirAlDrive
+# import subirAlDrive
+from soup import Soup
+from request import Request
+from logger import Logger
 
 MAX_URLS = 15 #absolute maximum of urls to scrape
 MID_URLS = 10 # if theres 1 contact found, stop after this amount of links
@@ -120,18 +123,13 @@ def scrapeWebsite(writer, url, name):
 
 
         try:
-            response = requests.get(new_url)
-            response.raise_for_status()
+            html = Request().getSource(new_url)
         except Exception as axc:
             logger.error('There was a problem processing %s', new_url)
             logger.error('Failed to open website', exc_info=True)
             continue
 
-        # print(response.text)
-        # extract all email addresses and add them into the resulting set
 
-
-        # TODO: falta parsear los mailto CREO
 
         emailRegex = re.compile(r'''
             [a-zA-Z0-9._%+-]+ #userName
@@ -140,35 +138,23 @@ def scrapeWebsite(writer, url, name):
             \.[a-zA-z]{2,4} #dot-something
             ''', re.VERBOSE|re.I)
 
-        new_emails = set(re.findall(emailRegex, response.text))
+        new_emails = set(re.findall(emailRegex, html))
 
         if len(new_emails) != 0:
             logger.info("!!!!!!!!!!!!!!!!!!MAIL found: %s", new_emails)
             emails.update(new_emails)
 
-        # print("MAIL found: %s" % new_emails)
 
 
-        # create a beutiful soup for the html document
-        soup = BeautifulSoup(response.text, "html.parser")
-        # print(response.text)
-
-        # # find and process all the anchors in the document
-        aTags = soup.find_all("a")
-        #TODO ver aca si me conviene popular con los otros links
-        if len(aTags) == 0:
-            # browser.get()
-            # aTags = browser.find_elements_by_tag_name('a')
-            reCheck(processed_urls, emails)
-            break
+        soup = Soup(html)
+        links = soup.getLinks()
 
 
-        for anchor in aTags:
+
+        for link in links:
             if foundEverything(emails, fbs, tws):
                 logger.info("found everything! Moving on...")
                 break
-            # extract link url from the anchor
-            link = anchor.attrs["href"] if "href" in anchor.attrs else ''
             logger.debug("New link found: %s", link)
 
 
@@ -246,8 +232,8 @@ def amountFound(emails, fbs, tws):
 def main():
 
     #MODO UNA SOLA PAGINA
-    url = 'https://www.labsalonmiami.com/'
-    name = 'labsalonmiami'
+    url = 'http://www.creatohairdressing.com/'
+    name = 'creatohairdressing'
     fileOut = 'emails for ' + name + '.csv'
     csvFileOut = open(fileOut, 'w')
     fieldnames = ['name', 'URL', 'emails', 'facebook', 'twitter']
