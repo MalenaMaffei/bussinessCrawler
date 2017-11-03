@@ -1,15 +1,18 @@
 import logging
 import sys
+from singleton import Singleton
+import datetime
 
 
+@Singleton
 class Logger:
-    def __init__(self, logName):
+    def __init__(self):
         formatter = logging.Formatter("%(asctime)s  [%(levelname)-5.5s]  %(message)s")
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
 
         # file handler
-        f_handler = logging.FileHandler(f'{logName}.log')
+        f_handler = logging.FileHandler(f'{datetime.datetime.now()}.log')
         f_handler.setLevel(logging.DEBUG)
         f_handler.setFormatter(formatter)
 
