@@ -1,7 +1,6 @@
 #! /usr/bin/python36
 from selenium import webdriver
 
-from urllib.parse import urlsplit
 from collections import deque
 import re
 import csv
